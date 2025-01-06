@@ -1,0 +1,13 @@
+Parameter, Weigths for Hot Storage, Weights for Warm Storage, Weights for Cold Storage
+Access Frequency, 0.35, 0.30 , 0.20, 
+Frequency of Access, 0.3, 0.25, 0.10,  
+File Size, 0.0 , 0.15, 0.30, 
+File Lifesycle Stage, 0.0 , 0.10 , 0.20
+Modification Frequency, 0.3 , 0.10 , 0.20  
+File Age, 0.05 , 0.1, 0.0 
+
+
+
+Note: Score 70 - 100 : Hot Storage, Score 40 - 70: Warm Storage, Score 0 - 40: Cold Storage, 
+
+

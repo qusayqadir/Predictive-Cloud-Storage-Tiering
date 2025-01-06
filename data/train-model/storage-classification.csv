@@ -1,0 +1,7 @@
+Metric, Hot Storage, Warm Storage, Cold Storage 
+Access Frequency, Frequently Accessed ( >= 10 times/day), Moderately (1-9 times/day), Rarely Accessed ( <1 time/day) 
+Frequency of Access, Consistent ( regular patterns ) , Irregular, Infrequent 
+File Size, <1 GB, 1-10GB, >10GB 
+File Lifesycle Stage, Active, Dormat, Archived 
+Modification Frequency, >=1/day, weekly or monthly, rarely modifeid 
+File Age, New File ( < 7 days), 7 - 30 days, >30 days 
