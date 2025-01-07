@@ -4,14 +4,9 @@ import random
 
 def createTrainCSV(): 
 
-    headers_train = [ "File_ID", "Access_Frequency","Frequnecy_of_Access","File_Size","File_Lifecycle_Stage","Modification_Frequency",
-        "File_Age","Storage_Tier" ]
 
-    headers_s3 = ["Access_Frequency", "Frequency_of_Access","File_Size", "File_Lifycle_Stage","Modification_Frequency","File_Age"]
+    headers_s3 = ["Access_Frequency", "Frequnecy_of_Access","File_Size", "File_Lifecycle_Stage","Modification_Frequency","File_Age"]
 
-    train_csv_file_path = "../../data/train-model/train-file-metadata.csv"  #output file path
-
-        # s3_csv_file_path = "../../data/s3-simulated-data/"
 
     storageTier_weights =  { 
 
@@ -45,14 +40,12 @@ def createTrainCSV():
 
     }
 
-    rows_train = [ ]  
-    rows_s3 = []
-    num_rows = 2000 
+    num_file = 1000 
 
 
     random.seed(1)
     
-    for i in range(num_rows): 
+    for i in range(1, num_file + 1): 
         tier_choice = random.choice(list(storageTier_weights.keys())) 
         # Keys: Hot, Cold, Warm 
 
@@ -67,29 +60,11 @@ def createTrainCSV():
 
         weighted_score = AccessF_score + FrequencyA_score + FileS_score + FileLS_score + ModF_score + FileA_score 
 
-        Storage_Tier = " " 
 
-        if weighted_score > 70 and weighted_score <= 100: 
-            Storage_Tier = "Hot" 
-        elif weighted_score <= 70 and weighted_score >=40: 
-            Storage_Tier = "Warm" 
-        else: 
-            Storage_Tier = "Cold"
-
-        row_train = { 
-            "File_ID" : f"File_{i+1}", 
-            "Access_Frequency" : AccessF_score,
-            "Frequnecy_of_Access" : FrequencyA_score, 
-            "File_Size" : FileS_score, 
-            "File_Lifecycle_Stage":  FileLS_score , 
-            "Modification_Frequency" : ModF_score , 
-            "File_Age" : FileA_score, 
-            "Storage_Tier" : Storage_Tier 
-        }
 
         row_s3 = {
             "Access_Frequency" : AccessF_score, 
-            "Frequency_of_Access" : FrequencyA_score, 
+            "Frequnecy_of_Access" : FrequencyA_score, 
             "File_Size" : FileS_score, 
             "File_Lifecycle_Stage" : FileLS_score, 
             "Modification_Frequency" : ModF_score,
@@ -97,14 +72,10 @@ def createTrainCSV():
         }
 
 
-
-        rows_train.append(row_train) 
-
-
-    with open(file=train_csv_file_path, mode="w", newline="") as file: 
-        writer = csv.DictWriter(file, fieldnames=headers_train) 
-        writer.writeheader() 
-        writer.writerows(rows_train)
+        with open(file=f"csv_files/File_{i}.csv", mode="w", newline="") as file: 
+            writer = csv.DictWriter(file, fieldnames=headers_s3) 
+            writer.writeheader() 
+            writer.writerow(row_s3)
 
 
 
